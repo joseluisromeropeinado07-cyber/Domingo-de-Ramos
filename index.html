@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Cuenta atrás - Domingo de Ramos</title>
 
-<!-- Fuente digital -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -13,7 +12,7 @@
         height: 100vh;
         background: black;
         color: #ff9f1a;
-        font-family: ;
+        font-family: 'Orbitron', sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -52,31 +51,51 @@
     </div>
 
     <div class="date">
-        21 de marzo de 2027 
+        21 de marzo de 2027 · 00:00
     </div>
 </div>
 
 <script>
-    const targetDate = new Date("March 21, 2027 00:00:00").getTime();
+    // Domingo de Ramos: 21 de marzo de 2027 a las 00:00
+    const targetDate = new Date(2027, 2, 21, 0, 0, 0).getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
         const distance = targetDate - now;
 
-        if (distance < 0) {
-            document.querySelector(".timer").innerHTML = "¡Ha llegado el día!";
+        if (distance <= 0) {
+            document.querySelector(".timer").innerHTML = "¡HA LLEGADO EL DÍA!";
             return;
         }
 
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById("days").textContent = days;
-        document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-        document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-        document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+        const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
+
+        const minutes = Math.floor(
+            (distance % (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
+
+        const seconds = Math.floor(
+            (distance % (1000 * 60)) /
+            1000
+        );
+
+        document.getElementById("days").textContent =
+            String(days).padStart(2, "0");
+
+        document.getElementById("hours").textContent =
+            String(hours).padStart(2, "0");
+
+        document.getElementById("minutes").textContent =
+            String(minutes).padStart(2, "0");
+
+        document.getElementById("seconds").textContent =
+            String(seconds).padStart(2, "0");
     }
 
     updateCountdown();
